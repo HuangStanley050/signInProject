@@ -8,7 +8,7 @@ class LoginsController < ApplicationController
   def secret; end
 
   def create
-    listing_params = params.require(:secret).permit(:bsb)
+    listing_params = params.permit(:bsb, :authenticity_token, :secret, :commit)
 
     puts listing_params
    end
