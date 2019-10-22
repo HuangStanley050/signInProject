@@ -9,7 +9,14 @@ class LoginsController < ApplicationController
 
   def create
     listing_params = params.permit(:bsb, :authenticity_token, :secret, :commit)
+    bsb = listing_params[:secret]
+    user_id = current_user.id
 
-    puts listing_params
+    @user = User.update(user_id, bsb: bsb)
+    if @user
+      redirect_to '/'
+    else
+      puts 'something went wrong'
+    end
    end
 end
